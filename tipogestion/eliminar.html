@@ -9,13 +9,13 @@
             <h1>Eliminar tipo de gestión</h1>
             <hr>
         
-               <div id="lbl_eliminar"  class="alert alert-danger" role="alert"></div>
+              <div id="lbl_eliminar"  class="alert alert-danger" role="alert"></div>
 
                 <!-- bootstrap toast -->
                 <button type="button" class="btn btn-danger" id="liveToastBtn" onclick="eliminarTipoGestion();">Eliminar</button>
 
                 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div id="liveToastConfirm" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                       <strong class="me-auto">Eliminación Exitosa!</strong>
                       <small>Recientemente</small>
@@ -23,6 +23,20 @@
                     </div>
                     <div class="toast-body">
                       Se ha eliminado exitosamente.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- alerta error -->
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                  <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <strong class="me-auto">Error</strong>
+                      <small>Recientemente</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      No se puede eliminar.
                     </div>
                   </div>
                 </div>

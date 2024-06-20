@@ -1,9 +1,9 @@
-var g_id_tipo_gestion ="";
+var g_id_resultado ="";
 
 //Función para agregar tipo de gestión
-function agregarTipoGestion(){
+function agregarResultado(){
 //Obtenemos el tipo de gestión que ingresa el usuario
-var nombre_tipo_gestion = document.getElementById("txt_nombre").value;
+var nombre_resultado = document.getElementById("txt_nombre").value;
 
 //Encabezado de la solicitud
 const myHeaders = new Headers();
@@ -13,7 +13,7 @@ var fechaHoraActual = obtenerFechaHora();
 
 //Carga útil de datos
 const raw = JSON.stringify({
-  "nombre_tipo_gestion": nombre_tipo_gestion,
+  "nombre_resultado": nombre_resultado,
   "fecha_registro": fechaHoraActual
 });
 
@@ -27,7 +27,7 @@ const requestOptions = {
 
 //Ejecutamos solicitud
 
-fetch("http://144.126.210.74:8080/api/tipo_gestion", requestOptions)
+fetch("http://144.126.210.74:8080/api/resultado", requestOptions)
   .then((response) => {
     const toastTrigger = document.getElementById("liveToastBtn");
     const toastCrear = document.getElementById("liveToast");
@@ -42,17 +42,17 @@ fetch("http://144.126.210.74:8080/api/tipo_gestion", requestOptions)
   .then((result) => console.log(result))
   .catch((error) => console.error(error));
 }
-function listarTipoGestion(){
+function listarResultado(){
   const requestOptions = {
     method: "GET",
     redirect: "follow"
   };
   
-  fetch("http://144.126.210.74:8080/api/tipo_gestion?_size=200", requestOptions)
+  fetch("http://144.126.210.74:8080/api/resultado?_size=200", requestOptions)
     .then((response) => response.json())
     .then((json) => {
       json.forEach(completarFila);
-      $('#tbl_tipo_gestion').DataTable();
+      $('#tbl_resultado').DataTable();
     } )
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
@@ -61,14 +61,14 @@ function completarFila(element,index,arr){
 
   var fechaHoraFormateada = formatearFechaHora(element.fecha_registro);
 
-  arr[index] = document.querySelector("#tbl_tipo_gestion tbody").innerHTML +=
+  arr[index] = document.querySelector("#tbl_resultado tbody").innerHTML +=
 `<tr>
-  <td>${element.id_tipo_gestion}</td>
-  <td>${element.nombre_tipo_gestion}</td>
+  <td>${element.id_resultado}</td>
+  <td>${element.nombre_resultado}</td>
   <td>${fechaHoraFormateada}</td>
   <td>
-    <a href='actualizar.html?id=${element.id_tipo_gestion}' class='btn btn-warning'>Actualizar</a> 
-    <a href='eliminar.html?id=${element.id_tipo_gestion}' class='btn btn-danger'>Eliminar</a> 
+    <a href='actualizar.html?id=${element.id_resultado}' class='btn btn-warning'>Actualizar</a> 
+    <a href='eliminar.html?id=${element.id_resultado}' class='btn btn-danger'>Eliminar</a> 
   </td>
 </tr>`
 }
@@ -78,9 +78,9 @@ function obtenerIdActualizar(){
   //obtenemos todos los parámetros
   const parametros = new URLSearchParams(queryString);
   //Nos posicionamos sobre un parámetro y obtenemos su valor actual
-  const p_id_tipo_gestion = parametros.get('id');
-  g_id_tipo_gestion = p_id_tipo_gestion;
-  obtenerDatosActualizar(p_id_tipo_gestion);
+  const p_id_resultado = parametros.get('id');
+  g_id_resultado = p_id_resultado;
+  obtenerDatosActualizar(p_id_resultado);
 
 }
 function obtenerIdEliminar(){
@@ -89,31 +89,31 @@ function obtenerIdEliminar(){
   //obtenemos todos los parámetros
   const parametros = new URLSearchParams(queryString);
   //Nos posicionamos sobre un parámetro y obtenemos su valor actual
-  const p_id_tipo_gestion = parametros.get('id');
-  g_id_tipo_gestion = p_id_tipo_gestion;
-  obtenerDatosEliminar(p_id_tipo_gestion);
+  const p_id_resultado = parametros.get('id');
+  g_id_resultado = p_id_resultado;
+  obtenerDatosEliminar(p_id_resultado);
 
 }
-function obtenerDatosEliminar(p_id_tipo_gestion){
+function obtenerDatosEliminar(p_id_resultado){
   const requestOptions = {
     method: "GET",
     redirect: "follow"
   };
   
-  fetch("http://144.126.210.74:8080/api/tipo_gestion/"+p_id_tipo_gestion, requestOptions)
+  fetch("http://144.126.210.74:8080/api/resultado/"+p_id_resultado, requestOptions)
     .then((response) => response.json())
     .then((json) => json.forEach(completarEtiqueta))
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
 
 }
-function obtenerDatosActualizar(p_id_tipo_gestion){
+function obtenerDatosActualizar(p_id_resultado){
   const requestOptions = {
     method: "GET",
     redirect: "follow"
   };
   
-  fetch("http://144.126.210.74:8080/api/tipo_gestion/"+p_id_tipo_gestion, requestOptions)
+  fetch("http://144.126.210.74:8080/api/resultado/"+p_id_resultado, requestOptions)
     .then((response) => response.json())
     .then((json) => json.forEach(completarFormulario))
     .then((result) => console.log(result))
@@ -121,20 +121,20 @@ function obtenerDatosActualizar(p_id_tipo_gestion){
 
 }
 function completarEtiqueta(element,index,arr){
-  var nombre_tipo_gestion = element.nombre_tipo_gestion;
-  document.getElementById('lbl_eliminar').innerHTML ="¿Desea eliminar el tipo de gestión? <b>" + nombre_tipo_gestion + "</b>";
+  var nombre_resultado = element.nombre_resultado;
+  document.getElementById('lbl_eliminar').innerHTML ="¿Desea eliminar el resultado? <b>" + nombre_resultado + "</b>";
 
 
 }
 function completarFormulario(element,index,arr){
-  var nombre_tipo_gestion = element.nombre_tipo_gestion;
-  document.getElementById('txt_nombre').value = nombre_tipo_gestion;
+  var nombre_resultado = element.nombre_resultado;
+  document.getElementById('txt_nombre').value = nombre_resultado;
 
 }
 
-function actualizarTipoGestion(){
+function actualizarResultado(){
   //Obtenemos el tipo de gestión que ingresa el usuario
-  var nombre_tipo_gestion = document.getElementById("txt_nombre").value;
+  var nombre_resultado = document.getElementById("txt_nombre").value;
   
   //Encabezado de la solicitud
   const myHeaders = new Headers();
@@ -142,7 +142,7 @@ function actualizarTipoGestion(){
   
   //Carga útil de datos
   const raw = JSON.stringify({
-    "nombre_tipo_gestion": nombre_tipo_gestion
+    "nombre_resultado": nombre_resultado
   });
   
   //Opciones de solicitud
@@ -154,7 +154,7 @@ function actualizarTipoGestion(){
   };
   
   //Ejecutamos solicitud
-  fetch("http://144.126.210.74:8080/api/tipo_gestion/"+ g_id_tipo_gestion, requestOptions)
+  fetch("http://144.126.210.74:8080/api/resultado/"+ g_id_resultado, requestOptions)
     .then((response) => {
       const toastTrigger = document.getElementById("liveToastBtn");
       const toastActualizar = document.getElementById("liveToast");
@@ -169,7 +169,7 @@ function actualizarTipoGestion(){
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
   }
-  function eliminarTipoGestion(){
+  function eliminarResultado(){
 
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -182,7 +182,7 @@ function actualizarTipoGestion(){
     };
     
     //Ejecutamos solicitud
-    fetch("http://144.126.210.74:8080/api/tipo_gestion/"+ g_id_tipo_gestion, requestOptions)
+    fetch("http://144.126.210.74:8080/api/resultado/"+ g_id_resultado, requestOptions)
       .then((response) => {
         const toastTrigger = document.getElementById("liveToastBtn");
         const toastEliminar = document.getElementById("liveToast");

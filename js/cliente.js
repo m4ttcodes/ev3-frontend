@@ -1,14 +1,14 @@
 var g_id_cliente ="";
 
-//Función para agregar tipo de gestión
+//Función para agregar cliente
 function agregarCliente(){
-//Obtenemos el tipo de gestión que ingresa el usuario
+//Obtenemos los datos del cliente
+var id_cliente = document.getElementById("txt_id").value;
 var dv_cliente = document.getElementById("txt_DV").value;
 var nombres_cliente = document.getElementById("txt_nombres").value;
 var apellidos_cliente = document.getElementById("txt_apellidos").value;
 var email_cliente = document.getElementById("txt_email").value;
 var celular_cliente = document.getElementById("txt_celular").value;
-
 
 //Encabezado de la solicitud
 const myHeaders = new Headers();
@@ -18,6 +18,7 @@ var fechaHoraActual = obtenerFechaHora();
 
 //Carga útil de datos
 const raw = JSON.stringify({
+  "id_cliente": id_cliente,
   "dv_cliente": dv_cliente,
   "nombres_cliente": nombres_cliente,
   "apellidos_cliente": apellidos_cliente,
@@ -56,7 +57,7 @@ function listarCliente(){
     redirect: "follow"
   };
   
-  fetch("http://144.126.210.74:8080/api/cliente?_size=200", requestOptions)
+  fetch("http://144.126.210.74:8080/api/cliente?_size=100", requestOptions)
     .then((response) => response.json())
     .then((json) => {
       json.forEach(completarFila);
@@ -106,26 +107,26 @@ function obtenerIdEliminar(){
   obtenerDatosEliminar(p_id_cliente);
 
 }
-function obtenerDatosEliminar(p_id_cliente){
+function obtenerDatosEliminar(id_cliente){
   const requestOptions = {
     method: "GET",
     redirect: "follow"
   };
   
-  fetch("http://144.126.210.74:8080/api/cliente/"+p_id_cliente, requestOptions)
+  fetch("http://144.126.210.74:8080/api/cliente/"+id_cliente, requestOptions)
     .then((response) => response.json())
     .then((json) => json.forEach(completarEtiqueta))
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
 
 }
-function obtenerDatosActualizar(p_id_cliente){
+function obtenerDatosActualizar(id_cliente){
   const requestOptions = {
     method: "GET",
     redirect: "follow"
   };
   
-  fetch("http://144.126.210.74:8080/api/cliente/"+p_id_cliente, requestOptions)
+  fetch("http://144.126.210.74:8080/api/cliente/"+id_cliente, requestOptions)
     .then((response) => response.json())
     .then((json) => json.forEach(completarFormulario))
     .then((result) => console.log(result))
@@ -134,20 +135,25 @@ function obtenerDatosActualizar(p_id_cliente){
 }
 function completarEtiqueta(element){
   var nombres_clientes = element.nombres_clientes;
-  var apellidos_clientes = element.pellidos_clientes;
+  var apellidos_clientes = element.apellidos_clientes;
   document.getElementById('lbl_eliminar').innerHTML ="¿Desea eliminar a este cliente? <b>" + nombres_clientes + apellidos_clientes + "</b>";
 
 
 }
 function completarFormulario(element,index,arr){
-  var nombre_tipo_gestion = element.nombre_tipo_gestion;
-  document.getElementById('txt_nombre').value = nombre_tipo_gestion;
+  var id_cliente = element.id_cliente;
+  document.getElementById('txt_id').value = id_cliente;
 
 }
 
 function actualizarCliente(){
   //Obtenemos el tipo de gestión que ingresa el usuario
-  var nombre_tipo_gestion = document.getElementById("txt_nombre").value;
+  var id_cliente = document.getElementById("txt_id").value;
+  var dv_cliente = document.getElementById("txt_DV").value;
+  var nombres_cliente = document.getElementById("txt_nombres").value;
+  var apellidos_cliente = document.getElementById("txt_apellidos").value;
+  var email_cliente = document.getElementById("txt_email").value;
+  var celular_cliente = document.getElementById("txt_celular").value;
   
   //Encabezado de la solicitud
   const myHeaders = new Headers();
@@ -155,6 +161,7 @@ function actualizarCliente(){
   
   //Carga útil de datos
   const raw = JSON.stringify({
+    "id_cliente": id_cliente,
     "dv_cliente": dv_cliente,
     "nombres_cliente": nombres_cliente,
     "apellidos_cliente": apellidos_cliente,

@@ -185,16 +185,20 @@ function actualizarTipoGestion(){
     fetch("http://144.126.210.74:8080/api/tipo_gestion/"+ g_id_tipo_gestion, requestOptions)
       .then((response) => {
         const toastTrigger = document.getElementById("liveToastBtn");
-        const toastEliminar = document.getElementById("liveToast");
+        const toastConfirmaEliminar = document.getElementById("liveToastConfirm");;
+        const toastErrorEliminar = document.getElementById("liveToastError");
   
       if (toastTrigger, response.status == 200) {
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastEliminar)
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastConfirmaEliminar)
         toastTrigger.addEventListener("click", () => {
           toastBootstrap.show()
         })
       }
-      if(response.status == 400){
-        alert("No es posible eliminar. Registro está siendo utilizado.");
+      if(toastTrigger, response.status == 400){
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastErrorEliminar)
+        toastTrigger.addEventListener("click", () => {
+          toastBootstrap.show()
+        })
       }
     })
       .then((result) => console.log(result))

@@ -144,21 +144,35 @@ function obtenerDatosActualizar(p_id_gestion){
     .catch((error) => console.error(error));
 
 }
-function completarEtiqueta(element,index,arr){
+function completarEtiqueta(){
 
   document.getElementById('lbl_eliminar').innerHTML ="¿Desea eliminar la gestión? <b>" + g_id_gestion + "</b>";
 
 }
 
 function completarFormulario(element){
-  var nombre_tipo_gestion = element.nombre_tipo_gestion;
-  document.getElementById('txt_nombre').value = nombre_tipo_gestion;
+
+  var id_usuario = element.id_usuario;
+  var id_cliente = element.id_cliente;
+  var id_tipo_gestion = element.id_tipo_gestion;
+  var id_resultado = element.id_resultado;
+  var comentarios = element.comentarios;
+
+  document.getElementById("sel_id_usuario").value = id_usuario;
+  document.getElementById("sel_id_cliente").value = id_cliente;
+  document.getElementById("sel_id_tipo_gestion").value = id_tipo_gestion;
+  document.getElementById("sel_id_resultado").value = id_resultado;
+  document.getElementById("txt_comentarios").value = comentarios;
 
 }
 
 function actualizarGestion(){
-  //Obtenemos el tipo de gestión que ingresa el usuario
-  var nombre_tipo_gestion = document.getElementById("txt_nombre").value;
+  //Obtenemos los datos de la gestión que ingresa el usuario
+  var id_usuario      = document.getElementById("sel_id_usuario").value;
+  var id_cliente      = document.getElementById("sel_id_cliente").value;
+  var id_tipo_gestion = document.getElementById("sel_id_tipo_gestion").value;
+  var id_resultado    = document.getElementById("sel_id_resultado").value;
+  var comentarios     = document.getElementById("txt_comentarios").value;
   
   //Encabezado de la solicitud
   const myHeaders = new Headers();
@@ -256,6 +270,8 @@ function actualizarGestion(){
         .then((response) => response.json())
         .then((json) => {
           json.forEach(completarOptionCliente);
+
+// funcion completar select cliente
         
         } )
         .then((result) => console.log(result))
