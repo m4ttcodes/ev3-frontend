@@ -4,11 +4,11 @@ var g_id_usuario ="";
 function agregarUsuario(){
 //Obtenemos los datos del usuario
 var id_usuario = document.getElementById("txt_id").value;
-var dv_usuario = document.getElementById("txt_dv").value;
-var nombres_usuario = document.getElementById("txt_nombres").value;
-var apellidos_usuario = document.getElementById("txt_apellidos").value;
-var email_usuario = document.getElementById("txt_email").value;
-var celular_usuario = document.getElementById("txt_celular").value;
+var dv = document.getElementById("txt_DV").value;
+var nombres = document.getElementById("txt_nombres").value;
+var apellidos = document.getElementById("txt_apellidos").value;
+var email = document.getElementById("txt_email").value;
+var celular = document.getElementById("txt_celular").value;
 var username = document.getElementById("txt_username").value;
 var password = document.getElementById("txt_password").value;
 
@@ -23,11 +23,11 @@ var fechaHoraActual = obtenerFechaHora();
 //Carga útil de datos
 const raw = JSON.stringify({
   "id_usuario": id_usuario,
-  "dv_usuario": dv_usuario,
-  "nombres_usuario": nombres_usuario,
-  "apellidos_usuario": apellidos_usuario,
-  "email_usuario": email_usuario,
-  "celular_usuario": celular_usuario,
+  "dv": dv,
+  "nombres": nombres,
+  "apellidos": apellidos,
+  "email": email,
+  "celular": celular,
   "username": username,
   "password": password,
   "fecha_registro": fechaHoraActual
@@ -80,11 +80,11 @@ function completarFila(element,index,arr){
   arr[index] = document.querySelector("#tbl_usuario tbody").innerHTML +=
 `<tr>
   <td>${element.id_usuario}</td>
-  <td>${element.dv_usuario}</td>
-  <td>${element.nombres_usuario}</td>
-  <td>${element.apellidos_usuario}</td>
-  <td>${element.email_usuario}</td>
-  <td>${element.celular_usuario}</td>
+  <td>${element.dv}</td>
+  <td>${element.nombres}</td>
+  <td>${element.apellidos}</td>
+  <td>${element.email}</td>
+  <td>${element.celular}</td>
   <td>${element.username}</td>
   <td>${element.password}</td>
   <td>${fechaHoraFormateada}</td>
@@ -151,20 +151,20 @@ function completarEtiqueta(element){
 function completarFormulario(element){
 
   var id_usuario = element.id_usuario;
-  var dv_usuario = element.dv_usuario;
-  var nombres_usuario = element.nombres_usuario;
-  var apellidos_usuario = element.apellidos_usuario;
-  var email_usuario = element.email_usuario;
-  var celular_usuario = element.celular_usuario;
+  var dv = element.dv;
+  var nombres = element.nombres;
+  var apellidos = element.apellidos;
+  var email = element.email;
+  var celular = element.celular;
   var username = element.username;
   var password = element.password;
 
   document.getElementById("txt_id").value = id_usuario;
-  document.getElementById("txt_dv").value = dv_usuario;
-  document.getElementById("txt_nombres").value = nombres_usuario;
-  document.getElementById("txt_apellidos").value = apellidos_usuario;
-  document.getElementById("txt_email").value = email_usuario;
-  document.getElementById("txt_celular").value = celular_usuario;
+  document.getElementById("txt_DV").value = dv;
+  document.getElementById("txt_nombres").value = nombres;
+  document.getElementById("txt_apellidos").value = apellidos;
+  document.getElementById("txt_email").value = email;
+  document.getElementById("txt_celular").value = celular;
   document.getElementById("txt_username").value = username;
   document.getElementById("txt_password").value = password;
 }
@@ -172,11 +172,11 @@ function completarFormulario(element){
 function actualizarUsuario(){
   //Obtenemos el tipo de gestión que ingresa el usuario
   var id_usuario = document.getElementById("txt_id").value;
-  var dv_usuario = document.getElementById("txt_dv").value;
-  var nombres_usuario = document.getElementById("txt_nombres").value;
-  var apellidos_usuario = document.getElementById("txt_apellidos").value;
-  var email_usuario = document.getElementById("txt_email").value;
-  var celular_usuario = document.getElementById("txt_celular").value;
+  var dv = document.getElementById("txt_DV").value;
+  var nombres = document.getElementById("txt_nombres").value;
+  var apellidos = document.getElementById("txt_apellidos").value;
+  var email = document.getElementById("txt_email").value;
+  var celular = document.getElementById("txt_celular").value;
   var username = document.getElementById("txt_username").value;
   var password = document.getElementById("txt_password").value;
   
@@ -187,11 +187,11 @@ function actualizarUsuario(){
   //Carga útil de datos
   const raw = JSON.stringify({
     "id_usuario": id_usuario,
-    "dv_usuario": dv_usuario,
-    "nombres_usuario": nombres_usuario,
-    "apellidos_usuario": apellidos_usuario,
-    "email_usuario": email_usuario,
-    "celular_usuario": celular_usuario,
+    "dv": dv,
+    "nombres": nombres,
+    "apellidos": apellidos,
+    "email": email,
+    "celular": celular,
     "username": username,
     "password": password
   });
@@ -205,7 +205,7 @@ function actualizarUsuario(){
   };
   
   //Ejecutamos solicitud
-  fetch("http://144.126.210.74:8080/api/resultado/"+ g_id_usuario, requestOptions)
+  fetch("http://144.126.210.74:8080/api/usuario/"+ g_id_usuario, requestOptions)
     .then((response) => {
       const toastTrigger = document.getElementById("liveToastBtn");
       const toastActualizar = document.getElementById("liveToast");
@@ -233,22 +233,20 @@ function actualizarUsuario(){
     };
     
     //Ejecutamos solicitud
-    fetch("http://144.126.210.74:8080/api/tipo_gestion/"+ g_id_tipo_gestion, requestOptions)
+    fetch("http://144.126.210.74:8080/api/usuario/"+ g_id_tipo_gestion, requestOptions)
       .then((response) => {
-        const toastTriggerConfirmation = document.getElementById("liveToastBtnConfirm");
-        const toastConfirmaEliminar = document.getElementById("liveToastConfirm");
-        const toastTriggerError = document.getElementById("liveToastBtnError");
-        const toastErrorEliminar = document.getElementById("liveToastError");
-  
-      if (toastTriggerConfirmation, response.status == 200) {
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastConfirmaEliminar)
-        toastTriggerConfirmation.addEventListener("click", () => {
+        const toastTrigger = document.getElementById("liveToastBtn");
+        const toastEliminar = document.getElementById("liveToast");
+
+      if (toastTrigger, response.status == 200) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastEliminar)
+        toastTrigger.addEventListener("click", () => {
           toastBootstrap.show()
         })
       }
-      if(toastTriggerError, response.status == 400){
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastErrorEliminar)
-        toastTriggerError.addEventListener("click", () => {
+      if(toastTrigger, response.status == 400){
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastEliminar)
+        toastTrigger.addEventListener("click", () => {
           toastBootstrap.show()
         })
       }

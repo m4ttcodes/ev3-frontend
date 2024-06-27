@@ -11,7 +11,21 @@
         
                <div id="lbl_eliminar"  class="alert alert-danger" role="alert"></div>
                 
-                <input class="btn btn-danger" type="button" value="Eliminar" onclick="eliminarTipoGestion();">
+                <!-- bootstrap toast -->
+                <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="eliminarCliente();">Agregar cliente</button>
+
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <strong class="me-auto">Creación Exitosa!</strong>
+                      <small>Recientemente</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      Se ha creado exitosamente.
+                    </div>
+                  </div>
+                </div>
                 <input class="btn btn-secondary" type="button" value="Cancelar" onclick="javascript:history.back();">
               
         </div>

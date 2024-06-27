@@ -134,9 +134,9 @@ function obtenerDatosActualizar(id_cliente) {
 
 }
 function completarEtiqueta(element) {
-  var nombress = element.nombress;
-  var apellidoss = element.apellidoss;
-  document.getElementById('lbl_eliminar').innerHTML = "¿Desea eliminar a este cliente? <b>" + nombress + apellidoss + "</b>";
+  var nombres = element.nombres;
+  var apellidos = element.apellidos;
+  document.getElementById('lbl_eliminar').innerHTML = "¿Desea eliminar a este cliente? <b>" + nombres + apellidos + "</b>";
 
 
 }

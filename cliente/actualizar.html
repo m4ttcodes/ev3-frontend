@@ -11,12 +11,27 @@
             <form>
 
                 <div class="mb-3">
-                  <label for="txt_nombre" class="form-label">Tipo de gestión</label>
-                  <input type="text" class="form-control" id="txt_nombre" aria-describedby="nombreHelp">
-                  <div id="nombreHelp" class="form-text">Ingrese el nombre de  tipo de gestión.</div>
+                  <label for="txt_nombres" class="form-label">Clientes</label>
+                  <input type="text" class="form-control" id="txt_nombres" aria-describedby="nombreHelp">
+                  <div id="nombreHelp" class="form-text">Ingrese el nombre del cliente.</div>
+                </div>
+
+                <!-- bootstrap toast -->
+                <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="actualizarCliente();">Agregar cliente</button>
+
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <strong class="me-auto">Creación Exitosa!</strong>
+                      <small>Recientemente</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      Se ha creado exitosamente.
+                    </div>
+                  </div>
                 </div>
                 
-                <input class="btn btn-primary" type="button" value="Actualizar" onclick="actualizarTipoGestion();">
                 <input class="btn btn-secondary" type="button" value="Cancelar" onclick="javascript:history.back();">
               </form>
         </div>
